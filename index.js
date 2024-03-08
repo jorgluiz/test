@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const cors = require('cors')
 
+app.use(cors())
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); // ou substitua '*' pela origem específica
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
