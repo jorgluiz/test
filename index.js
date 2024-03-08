@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors());
 
 const { MercadoPagoConfig, Customer, PaymentMethod, CustomerCard, Payment, CardToken } = require('mercadopago');
-const client = new MercadoPagoConfig({ accessToken: 'TEST--030112-fc76768e07cf6b9c6ea84c4746d4b504-436624597' });
+const client = new MercadoPagoConfig({ accessToken: 'TEST-5989202427278445-030112-fc76768e07cf6b9c6ea84c4746d4b504-436624597' });
 const customerClient = new Customer(client)
 const customerCard = new CustomerCard(client);
 const payment = new Payment(client);
@@ -21,31 +21,27 @@ app.get('/', (req, res) => {
 })
 
 app.post('/process_payment', (req, res) => {
-     // Acessa os dados do corpo da solicitação
-     const { token, issuer_id, payment_method_id, transaction_amount, installments, description, payer: { email, identification: { type, number } } } = req.body;
+    console.log(req.body)
 
-      // Realiza o pagamento com os dados recebidos
-      payment.create({
+    payment.create({
         body: { 
-            transaction_amount,
-            token,
-            description,
-            installments,
-            payment_method_id,
-            issuer_id,
-            payer: {
-                email,
+            transaction_amount: req.transaction_amount,
+            token: req.token,
+            description: req.description,
+            installments: req.installments,
+            payment_method_id: req.paymentMethodId,
+            issuer_id: req.issuer,
+                payer: {
+                email: req.email,
                 identification: {
-                    type,
-                    number
-                }
-            }
-        },
+            type: req.identificationType,
+            number: req.number
+        }}},
         requestOptions: { idempotencyKey: '<SOME_UNIQUE_VALUE>' }
     })
     .then((result) => {
-        console.log(result);
-        return res.send(result);
+        console.log(result)
+        return res.send(result)
     })
     .catch((error) => console.log(error));
 })
