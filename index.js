@@ -1,10 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const cors = require('cors');
-
-// Configuração do CORS para todas as requisições
-app.use(cors());
+const cors = require('cors')
 
 const { MercadoPagoConfig, Customer, PaymentMethod, CustomerCard, Payment, CardToken } = require('mercadopago');
 const client = new MercadoPagoConfig({ accessToken: 'APP_USR-5989202427278445-030112-dc4e3f0d64cb3963e679a437e5ab5e90-436624597' });
