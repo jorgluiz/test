@@ -21,27 +21,31 @@ app.get('/', (req, res) => {
 })
 
 app.post('/process_payment', (req, res) => {
-   return res.send(req.body)
+     // Acessa os dados do corpo da solicitação
+     const { token, issuer_id, payment_method_id, transaction_amount, installments, description, payer: { email, identification: { type, number } } } = req.body;
 
-    payment.create({
+      // Realiza o pagamento com os dados recebidos
+      payment.create({
         body: { 
-            transaction_amount: req.transaction_amount,
-            token: req.token,
-            description: req.description,
-            installments: req.installments,
-            payment_method_id: req.paymentMethodId,
-            issuer_id: req.issuer,
-                payer: {
-                email: req.email,
+            transaction_amount,
+            token,
+            description,
+            installments,
+            payment_method_id,
+            issuer_id,
+            payer: {
+                email,
                 identification: {
-            type: req.identificationType,
-            number: req.number
-        }}},
+                    type,
+                    number
+                }
+            }
+        },
         requestOptions: { idempotencyKey: '<SOME_UNIQUE_VALUE>' }
     })
     .then((result) => {
-        console.log(result)
-        return res.send(result)
+        console.log(result);
+        return res.send(result);
     })
     .catch((error) => console.log(error));
 })
