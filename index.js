@@ -13,8 +13,11 @@ const customerCard = new CustomerCard(client);
 const payment = new Payment(client);
 const cardToken = new CardToken(client);
 
+// Define o diretório de arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'api/views', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
 app.post('/process_payment', (req, res) => {
