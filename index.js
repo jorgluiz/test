@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors());
 
 const { MercadoPagoConfig, Customer, PaymentMethod, CustomerCard, Payment, CardToken } = require('mercadopago');
-const client = new MercadoPagoConfig({ accessToken: 'TEST-5989202427278445-030112-fc76768e07cf6b9c6ea84c4746d4b504-436624597' });
+const client = new MercadoPagoConfig({ accessToken: 'TEST--030112-fc76768e07cf6b9c6ea84c4746d4b504-436624597' });
 const customerClient = new Customer(client)
 const customerCard = new CustomerCard(client);
 const payment = new Payment(client);
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/process_payment', (req, res) => {
-    console.log(req.body)
+   return res.send(req.body)
 
     payment.create({
         body: { 
