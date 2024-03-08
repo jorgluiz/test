@@ -44,7 +44,7 @@
 
  
     const cardForm = mp.cardForm({
-      amount: "1.5",
+      amount: "1.0",
       iframe: true,
       form: {
         id: "form-checkout",
@@ -104,7 +104,7 @@
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch("http://localhost:3000/process_payment", {
+          fetch("https://test-three-silk-38.vercel.app/process_payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
