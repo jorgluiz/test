@@ -43,7 +43,7 @@ app.post('/process_payment', (req, res) => {
             type: req.identificationType,
             number: req.number
         }}},
-        requestOptions: { idempotencyKey: '<SOME_UNIQUE_VALUE>' }
+        requestOptions: { idempotencyKey: 'pBxd96iCQq324GSmrjobePi68GX7bGqC' }
     })
     .then((result) => {
         console.log(result)
