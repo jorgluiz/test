@@ -104,7 +104,7 @@
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch("/process_payment", {
+          fetch("https://test-three-silk-38.vercel.app/process_payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
