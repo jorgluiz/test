@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 
-app.post('https://test-three-silk-38.vercel.app/process_payment', (req, res) => {
+app.post('/process_payment', (req, res) => {
   const { body } = req
   console.log(body)
 
