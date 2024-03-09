@@ -113,8 +113,8 @@
               token,
               issuer_id,
               payment_method_id,
-              transaction_amount: Number(amount),
-              installments: Number(installments),
+              transaction_amount: amount,
+              installments: installments,
               description: "Descrição do produto",
               payer: {
                 email,
@@ -141,5 +141,4 @@
     });
 
 </script>
-
 </html>
