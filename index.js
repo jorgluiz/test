@@ -89,6 +89,4 @@ const options = {
 };
 
 
-https.createServer(options, app).listen(443, () => {
-  console.log('Servidor HTTPS está sendo executado na porta 443...');
-})
+app.listen()
