@@ -104,7 +104,7 @@
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch("http://localhost:3000/process_payment", {
+          fetch("https://localhost:443/process_payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

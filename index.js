@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors')
+const fs = require('fs')
+const https = require('https')
 
 // app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*'); // ou substitua '*' pela origem específica
@@ -81,6 +83,12 @@ function validateError(error) {
   return { errorMessage, errorStatus };
 }
 
-app.listen(3000, () => {
-  console.log('Servidor HTTPS está ouvindo na porta 3000');
-});
+const options = {
+  key: fs.readFileSync(path.resolve(__dirname, '../cert', 'server.key')),
+  cert: fs.readFileSync(path.resolve(__dirname, '../cert', 'server.cert'))
+};
+
+
+https.createServer(options, app).listen(443, () => {
+  console.log('Servidor HTTPS está sendo executado na porta 443...');
+})
