@@ -37,6 +37,9 @@ app.get("/", function (req, res) {
   res.status(200).render("index", { mercadoPagoPublicKey });
 });
 
+app.get("/home", function (req, res) {
+  res.status(200).render("index");
+});
 
 app.post('/process_payment', (req, res) => {
   const { body } = req
