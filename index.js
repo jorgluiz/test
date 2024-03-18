@@ -30,7 +30,7 @@ app.set("views", path.join(__dirname, "views"));
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("./static"));
+app.use(express.static(path.join(__dirname, "static")));
 app.use(express.json());
 
 app.get("/", function (req, res) {
@@ -92,7 +92,4 @@ function validateError(error) {
 }
 
 
-app.listen(8080, () => {
-  console.log("The server is now running on port 8080");
-  open("http://localhost:8080");
-});
+module.exports = app;
