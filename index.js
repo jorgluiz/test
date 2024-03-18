@@ -26,11 +26,11 @@ const app = express();
 
 app.set("view engine", "html");
 app.engine("html", require("hbs").__express);
-app.set("views", path.join(__dirname, "public/views"));
+app.set("views", path.join(__dirname, "./public/views"));
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("./public/static"));
+app.use(express.static("./public"));
 app.use(express.json());
 
 app.get("/", function (req, res) {
@@ -92,7 +92,7 @@ function validateError(error) {
 }
 
 
-// app.listen(8080, () => {
-//   console.log("The server is now running on port 8080");
-//   open("http://localhost:8080");
-// });
+app.listen(8080, () => {
+  console.log("The server is now running on port 8080");
+  open("http://localhost:8080");
+});
