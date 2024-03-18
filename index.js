@@ -1,40 +1,48 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors')
-const fs = require('fs')
-const https = require('https')
+const open = require('open');
+const mercadopago = require("mercadopago");
 
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*'); // ou substitua '*' pela origem específica
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     next();
-// }); 
+require('dotenv').config()
 
-const app = express();
 
-const { MercadoPagoConfig, Customer, PaymentMethod, CustomerCard, Payment, CardToken } = require('mercadopago');
-const client = new MercadoPagoConfig({ accessToken: 'APP_USR-5989202427278445-030112-dc4e3f0d64cb3963e679a437e5ab5e90-436624597' });
-const customerClient = new Customer(client)
-const customerCard = new CustomerCard(client);
-const payment = new Payment(client);
-const cardToken = new CardToken(client);
+const mercadoPagoPublicKey = process.env.MERCADO_PAGO_SAMPLE_PUBLIC_KEY;
+if (!mercadoPagoPublicKey) {
+  console.log("Error: public key not defined");
+  process.exit(1);
+}
+
+const mercadoPagoAccessToken = process.env.MERCADO_PAGO_SAMPLE_ACCESS_TOKEN;
+if (!mercadoPagoAccessToken) {
+  console.log("Error: access token not defined");
+  process.exit(1);
+}
+
+const client = new mercadopago.MercadoPagoConfig({
+  accessToken: mercadoPagoAccessToken,
+});
+
+const app = express(); 
 
 app.set("view engine", "html");
-// app.engine("html", require("hbs").__express);
+app.engine("html", require("hbs").__express);
 app.set("views", path.join(__dirname, "views"));
 
+
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("./public"));
+app.use(express.static("./static"));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-})
+app.get("/", function (req, res) {
+  res.status(200).render("index", { mercadoPagoPublicKey });
+});
+
 
 app.post('/process_payment', (req, res) => {
   const { body } = req
   console.log(body)
+
+  const payment = new mercadopago.Payment(client);
 
  const paymentData = {
     transaction_amount: Number(body.transaction_amount),
@@ -83,10 +91,8 @@ function validateError(error) {
   return { errorMessage, errorStatus };
 }
 
-const options = {
-  key: fs.readFileSync(path.resolve(__dirname, '../cert', 'server.key')),
-  cert: fs.readFileSync(path.resolve(__dirname, '../cert', 'server.cert'))
-};
 
-
-app.listen()
+app.listen(8080, () => {
+  console.log("The server is now running on port 8080");
+  open("http://localhost:8080");
+});
