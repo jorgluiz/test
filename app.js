@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
 });
 
 app.get('/venda', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
 
 app.post('/process_payment', (req, res) => {
