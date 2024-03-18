@@ -2,7 +2,7 @@ const mercadoPagoPublicKey = document.getElementById("mercado-pago-public-key").
 const mp = new MercadoPago(mercadoPagoPublicKey);
 
 const cardForm = mp.cardForm({
-  amount: "100.5",
+  amount: "2",
   iframe: true,
   form: {
     id: "form-checkout",

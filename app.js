@@ -91,9 +91,9 @@ function validateError(error) {
   return { errorMessage, errorStatus };
 }
 
-module.exports = app;
+// module.exports = app;
 
-// app.listen(8080, () => {
-//   console.log("The server is now running on port 8080");
-//   open("http://localhost:8080");
-// });
+app.listen(8080, () => {
+  console.log("The server is now running on port 8080");
+  open("http://localhost:8080");
+});
