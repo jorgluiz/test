@@ -37,8 +37,8 @@ app.get("/", function (req, res) {
   res.status(200).render("index", { mercadoPagoPublicKey });
 });
 
-app.get("/home", function (req, res) {
-  res.status(200).render("index");
+app.get('/venda', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/views', 'index.html'));
 });
 
 app.post('/process_payment', (req, res) => {
