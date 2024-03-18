@@ -30,7 +30,7 @@ app.set("views", path.join(__dirname, "public"));
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static("./public/static"));
 app.use(express.json());
 
 app.get("/", function (req, res) {
