@@ -24,13 +24,13 @@ const client = new mercadopago.MercadoPagoConfig({
 
 const app = express(); 
 
-app.set("public engine", "html");
+app.set("view engine", "html");
 app.engine("html", require("hbs").__express);
-app.set("views", path.join(__dirname, "./public"));
+app.set("views", path.join(__dirname, "public"));
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public/js")));
+app.use(express.static("public"));
 app.use(express.json());
 
 app.get("/", function (req, res) {
