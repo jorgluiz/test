@@ -30,16 +30,16 @@ app.set("views", path.join(__dirname, "public"));
 
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("./public"));
+app.use(express.static("public"));
 app.use(express.json());
 
 app.get("/", function (req, res) {
   res.status(200).render("index", { mercadoPagoPublicKey });
 });
 
-app.get('/venda', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
-});
+// app.get('/venda', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+// });
 
 app.post('/process_payment', (req, res) => {
   const { body } = req
